@@ -5,7 +5,7 @@ namespace aoc2021
     class Day1
     {
         
-        public static int SumIncreases(List<int> list)
+        private static int SumIncreases(List<int> list)
         {
             int increases = 0;
             for (int i = 1; i < list.Count; i++)
@@ -17,13 +17,13 @@ namespace aoc2021
 
         public static int Task1()
         {
-            var list = aocIO.GetIntInput("day1.txt");
+            var list = aocIO.GetIntList("day01.txt");
             return SumIncreases(list);
         }
 
         public static int Task2()
         {
-            var tmplist = aocIO.GetIntInput("day1.txt");
+            var tmplist = aocIO.GetIntList("day01.txt");
             
             var list = new List<int>();
             for (int i = 0; i < tmplist.Count - 2; i++)

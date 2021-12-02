@@ -5,10 +5,15 @@ namespace aoc2021
 {
     class aocIO
     {
-        public static List<int> GetIntInput(string day)
+        public static List<int> GetIntList(string day)
         {
             return System.IO.File.ReadAllLines(@"./inputs/" + day).Select(int.Parse).ToList();
         }
+
+        public static List<string> GetStringList(string day)
+        {
+            return new List<string>(System.IO.File.ReadAllLines(@"./inputs/" + day));
+        }  
 
     }
 }
