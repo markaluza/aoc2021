@@ -15,13 +15,13 @@ namespace aoc2021
             return increases;
         }
 
-        public static int Task1()
+        public static long Task1()
         {
             var list = aocIO.GetIntList("day01.txt");
             return SumIncreases(list);
         }
 
-        public static int Task2()
+        public static long Task2()
         {
             var tmplist = aocIO.GetIntList("day01.txt");
             

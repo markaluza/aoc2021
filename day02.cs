@@ -21,7 +21,7 @@ namespace aoc2021
             return ret;
         }
 
-        public static int Task1()
+        public static long Task1()
         {
             int depth = 0;
             int horizontal = 0;
@@ -42,7 +42,7 @@ namespace aoc2021
             
         }
 
-        public static int Task2()
+        public static long Task2()
         {
             int depth = 0;
             int horizontal = 0;
