@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 
 namespace aoc2021
 {
@@ -51,6 +51,49 @@ namespace aoc2021
             
             return gama * epsilon;
 
+        }
+
+        private static void split(List<string> lines, int position, out List<string> zeroes, out List<string> ones)
+        {
+            zeroes = new  List<string>();
+            ones = new  List<string>();
+            foreach(var line in lines)
+            {
+                if (line[position] == '1') ones.Add(line);
+                else zeroes.Add(line);
+            }
+        }
+
+        public static long Task2()
+        {
+            /*var lines = aocIO.GetStringList("day03.txt");
+
+            var zeroes = new List<string>();
+            var ones = new List<string>();
+
+            split(lines, 0, out zeroes, out ones);
+
+            List<string> ox  = null;
+            List<string> co  = null;
+
+            if (zeroes.Count < ones.Count)
+            {
+                ox = ones;
+                co = zeroes;
+            }
+            else
+            {
+                ox = zeroes;
+                co = ones;
+            }
+
+            for (int i = 1; i < lines[0].Length && ox.Count > 1; i++)
+
+            return oxgen.Count;*/
+
+            return 0;
+                                           
+        
         }
     }
 }
