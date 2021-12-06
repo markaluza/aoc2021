@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace aoc2021
 {
@@ -10,6 +11,9 @@ namespace aoc2021
         {
             int[,] number = new int[5,5];
             bool[,] used = new bool[5,5];
+
+            public int boardno = 0;
+            public Board(int b) { boardno = b; }
 
             public void SetNmb(int x, int y, int nmb)
             {
@@ -68,6 +72,7 @@ namespace aoc2021
                 }
                 return sum;
             }
+
         }
 
         class Input
@@ -87,7 +92,7 @@ namespace aoc2021
                    int firstline = b * 6 + 2;
                    if (firstline >= lines.Count) break;
 
-                    var board = new Board();
+                    var board = new Board(b+1);
 
                     for (int l = 0; l < 5; l++)
                     {
@@ -120,6 +125,37 @@ namespace aoc2021
                 return -1;
             }
 
+            public long Game2()
+            {
+
+                int lastmove = 0;
+                Board lastboard = null;
+                for (int move =0; move < Moves.Count; move++)
+                {
+                    for (int b = 0; b < Boards.Count; b++)
+                    {
+                        if (Boards[b].Turn(Moves[move]))
+                        {
+                            lastboard = Boards[b];
+                            Console.WriteLine("");
+                            Boards.RemoveAt(b);
+                            b--;
+                        }
+                    }
+
+                    lastmove = Moves[move];
+                    
+                    if (Boards.Count == 0) 
+                    {
+                        break;
+                    }
+
+                }
+
+                return lastboard.SumNotUsed() * lastmove;
+            }
+
+
         }
 
         // bingo
@@ -133,7 +169,8 @@ namespace aoc2021
        public static long Task2()
        {
         
-            return 0;
+           var input = new Input();
+           return input.Game2();
        }       
     }
 }
