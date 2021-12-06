@@ -137,7 +137,6 @@ namespace aoc2021
                         if (Boards[b].Turn(Moves[move]))
                         {
                             lastboard = Boards[b];
-                            Console.WriteLine("");
                             Boards.RemoveAt(b);
                             b--;
                         }
@@ -165,7 +164,6 @@ namespace aoc2021
            return input.Game1();
        }
 
-       // tbd
        public static long Task2()
        {
         
