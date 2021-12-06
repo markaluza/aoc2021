@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace aoc2021
@@ -66,7 +67,7 @@ namespace aoc2021
 
         public static long Task2()
         {
-            /*var lines = aocIO.GetStringList("day03.txt");
+            var lines = aocIO.GetStringList("day03.txt");
 
             var zeroes = new List<string>();
             var ones = new List<string>();
@@ -88,10 +89,37 @@ namespace aoc2021
             }
 
             for (int i = 1; i < lines[0].Length && ox.Count > 1; i++)
+            {
+                split(ox, i, out zeroes, out ones);
+                if (zeroes.Count <= ones.Count)
+                {
+                    ox = ones;
+                }
+                else
+                {
+                    ox = zeroes;
+                }
+            }
 
-            return oxgen.Count;*/
+            for (int i = 1; i < lines[0].Length && co.Count > 1; i++)
+            {
+                split(co, i, out zeroes, out ones);
+                if (ones.Count < zeroes.Count)
+                {
+                    co = ones;
+                }
+                else
+                {
+                    co = zeroes;
+                }
+            }
 
-            return 0;
+
+            long nox = Convert.ToUInt32(ox[0], 2);
+            long nco = Convert.ToUInt32(co[0], 2);
+            
+
+            return nox * nco;
                                            
         
         }
