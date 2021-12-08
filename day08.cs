@@ -78,24 +78,35 @@ namespace aoc2021
                 dict.Add(7, FindOutStringWithLen(line, 3)[0]);
                 dict.Add(8, FindOutStringWithLen(line, 7)[0]);
 
-                char top = dict[7].Except(dict[1]).First();
                 var zerosixnine = FindOutStringWithLen(line, 6);
                 var twothreefive = FindOutStringWithLen(line, 5);
 
                 // sestak je jedny z 069 ktery nema jeden znak z 1
                 char topright = ' ';
                 char bottomright = ' ';
-                var zeronine = zerosixnine;
+                var dif41 = new HashSet<char>(dict[4]); 
+                dif41.ExceptWith(dict[1]);
                 for(int i =0; i < zerosixnine.Count; i++)
                 {
                     var set = zerosixnine[i];
                     if (!dict[1].IsSubsetOf(set))
                     {
                         dict.Add(6, set);
-                        zeronine.RemoveAt(i);
                         topright = dict[1].Except(set).First();
                         bottomright = dict[1].Except( new List<char> { topright } ).First();
-                        break;
+                    }
+                    else
+                    {
+                        // 9 obsahuje casti 4 ky
+                        if (dif41.IsSubsetOf(set))
+                        {
+                            dict.Add(9, set);
+                        }
+                        else
+                        {
+                        // 0 je nema
+                             dict.Add(0, set);
+                        }
                     }
                 }
                 
@@ -119,17 +130,7 @@ namespace aoc2021
                             dict.Add(5, set);
                         }
                     }
-                }     
-
-                char bottomleft = dict[6].Except(dict[5]).First();
-
-                foreach (var set in zeronine)
-                {
-                    if (set.Contains(bottomleft))
-                        dict.Add(0, set);
-                    else 
-                        dict.Add(9, set);
-                };
+                }
 
                 long result = 0;
                 foreach(var val in line.Item2)
