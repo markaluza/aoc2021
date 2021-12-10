@@ -80,7 +80,6 @@ namespace aoc2021
 
        private static long GetBasinSize(List<string> input, (int, int) pos)
        {
-            long ret = 0;
             
             var queuetotest = new Queue<(int, int)>(); queuetotest.Enqueue( pos );
             var basin = new HashSet<(int, int)>() { pos };
