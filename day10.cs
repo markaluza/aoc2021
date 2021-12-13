@@ -86,8 +86,9 @@ namespace aoc2021
 
                 allscores.Add(totscore);
 
-            }        
+            }
 
+            
             allscores.Sort();
             return allscores[allscores.Count /2];
        }       
