@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace aoc2021
 {
@@ -19,6 +20,12 @@ namespace aoc2021
         {
             return new List<string>(System.IO.File.ReadAllLines(@"./inputs/" + day));
         }  
+
+        public static void PrintStringList(List<string> list)
+        {
+            Console.WriteLine(String.Join(", ", list));
+        }
+        
 
     }
 }
