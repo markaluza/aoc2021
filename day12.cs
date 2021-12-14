@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System;
 
 namespace aoc2021
 {
@@ -9,6 +10,7 @@ namespace aoc2021
         {
             var dict = new Dictionary<string,List<string>>();
             var lines = aocIO.GetStringList("day12.txt");
+            //var lines = aocIO.GetStringList("tst.txt");
             foreach(var line in lines)
             {
                 var joints = line.Split("-");
@@ -25,17 +27,21 @@ namespace aoc2021
 
         class Path
         {
-     
-
             public List<string> strpath = new List<string>();
+            public string twicecave = "";
                         
-            public List<Path> Recurse(Dictionary<string,List<string>> dict) 
+            public List<Path> Recurse(Dictionary<string,List<string>> dict, int task) 
             {
                 List<Path> ret = new List<Path>();
+
+                var orig = twicecave;
 
                 var strlist = dict[strpath[strpath.Count -1]];
                 foreach(var test in  strlist) 
                 {
+
+                    if (test == "start")
+                        continue;
 
                     if (test == "end") 
                     {
@@ -43,13 +49,27 @@ namespace aoc2021
                         continue;
                     }
 
-                    if (char.IsLower(test[0]) && strpath.Contains(test)) continue;
+                    if (task == 1)
+                    {
+                        if (char.IsLower(test[0]) && strpath.Contains(test)) continue;
+                    }
+                    else
+                    {
+                        if (char.IsLower(test[0]) && strpath.Contains(test)) 
+                        {
+                            if (twicecave != "")  continue;
+                            twicecave = test;
+                        }
+                    }
 
                     Path p = new Path();
                     p.strpath = new List<string>(strpath);
                     p.strpath.Add(test);
+                    p.twicecave = twicecave;
 
-                    var rec = p.Recurse(dict);
+                    twicecave = orig;
+
+                    var rec = p.Recurse(dict, task);
                     ret.AddRange(rec);
 
                 }
@@ -67,11 +87,8 @@ namespace aoc2021
             foreach(var path in input["start"])
             {
                 Path p = new Path();
-                p.strpath.Add("start");
                 p.strpath.Add(path);
-
-                paths.AddRange(p.Recurse(input));
-
+                paths.AddRange(p.Recurse(input, 1));
             }
 
             return paths.Count;            
@@ -81,8 +98,17 @@ namespace aoc2021
        public static long Task2()
        {                
 
+            var input = GetInput();
 
-           return 0;
+            var paths = new List<Path>();
+            foreach(var path in input["start"])
+            {
+                Path p = new Path();
+                p.strpath.Add(path);
+                paths.AddRange(p.Recurse(input, 2));
+            }
+
+            return paths.Count;     
        }       
     }
 }
