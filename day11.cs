@@ -33,14 +33,8 @@ namespace aoc2021
                 if (flashed.Contains((x,y))) return;
                 flashed.Add((x,y));
 
-                Increase(ref map, x-1, y-1, ref flashed);
-                Increase(ref map, x, y-1, ref flashed);
-                Increase(ref map, x+1, y-1, ref flashed);
-                Increase(ref map, x+1, y, ref flashed);
-                Increase(ref map, x+1, y+1, ref flashed);
-                Increase(ref map, x, y+1, ref flashed);
-                Increase(ref map, x-1, y+1, ref flashed);
-                Increase(ref map, x-1, y, ref flashed);
+                foreach (var tuple in new List<(int, int)> {(-1, -1), (0, -1), (+1, -1), (+1, 0), (+1, +1), (0, +1), (-1, +1), (-1, 0)})
+                    Increase(ref map, x+tuple.Item1, y+tuple.Item2, ref flashed);
 
             };
         }
