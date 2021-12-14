@@ -88,7 +88,6 @@ namespace aoc2021
                 if (Step(ref map) == 100) return i;
             }
             
-            return 0;
        }       
     }
 }
