@@ -20,7 +20,7 @@ namespace aoc2021
             return map;
         }
 
-        private static void Flash(ref int [,] map, int x, int y, ref HashSet<(int, int)> flashed)
+        private static void Increase(ref int [,] map, int x, int y, ref HashSet<(int, int)> flashed)
         {
 
             if (x < 0 || x >= map.GetLength(0) ||
@@ -33,14 +33,14 @@ namespace aoc2021
                 if (flashed.Contains((x,y))) return;
                 flashed.Add((x,y));
 
-                Flash(ref map, x-1, y-1, ref flashed);
-                Flash(ref map, x, y-1, ref flashed);
-                Flash(ref map, x+1, y-1, ref flashed);
-                Flash(ref map, x+1, y, ref flashed);
-                Flash(ref map, x+1, y+1, ref flashed);
-                Flash(ref map, x, y+1, ref flashed);
-                Flash(ref map, x-1, y+1, ref flashed);
-                Flash(ref map, x-1, y, ref flashed);
+                Increase(ref map, x-1, y-1, ref flashed);
+                Increase(ref map, x, y-1, ref flashed);
+                Increase(ref map, x+1, y-1, ref flashed);
+                Increase(ref map, x+1, y, ref flashed);
+                Increase(ref map, x+1, y+1, ref flashed);
+                Increase(ref map, x, y+1, ref flashed);
+                Increase(ref map, x-1, y+1, ref flashed);
+                Increase(ref map, x-1, y, ref flashed);
 
             };
         }
@@ -51,7 +51,7 @@ namespace aoc2021
             {
                 for (int x =0; x < map.GetLength(1); x++)
                 {
-                   Flash(ref map, x,y, ref flashes);
+                   Increase(ref map, x,y, ref flashes);
                 }
             }
 
