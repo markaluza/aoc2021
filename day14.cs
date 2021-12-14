@@ -13,14 +13,14 @@ namespace aoc2021
             return new string( chrs );
         }
 
-        private static (Dictionary<string, long>, Dictionary<string, List<string>>, Dictionary<char, long>) GetInput()
+        private static long GetDiff(long steps)
         {
-            var input = new Dictionary<string, long>();
-            var rules = new Dictionary<string, List<string>>();
-            var sum = new Dictionary<char, long>();
+
+            var input = new Dictionary<string, long>();         // zadani
+            var rules = new Dictionary<string, List<string>>(); // pravidla prepisu
+            var sum = new Dictionary<char, long>();             // sumy u znaku
 
             var lines =aocIO.GetStringList("day14.txt");
-
             for (int i =2; i < lines.Count; i++)
             {
                 var match = Regex.Match(lines[i], "(..) -> (.)");
@@ -46,15 +46,7 @@ namespace aoc2021
                 sum[chr] += 1;
             }
 
-            return (input, rules, sum); 
-        }
-
-        private static long GetDiff(long steps)
-        {
-             var input = GetInput();
-
-            var res = input.Item1;
-            var sum = input.Item3;            
+            var res = input;           
             
             for (int i =0; i < steps; i++)
             {
@@ -63,8 +55,8 @@ namespace aoc2021
 
                 foreach(var it in res)
                 {
-                    var k1 = input.Item2[it.Key][0];
-                    var k2 = input.Item2[it.Key][1];
+                    var k1 = rules[it.Key][0];
+                    var k2 = rules[it.Key][1];
 
                     step[k1] +=  it.Value;
                     step[k2] +=  it.Value;
