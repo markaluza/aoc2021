@@ -6,75 +6,50 @@ namespace aoc2021
     class Day15
     {
 
-        class MapItem
-        {
-            public long alt = 0;
-            public long risklevel = long.MaxValue;
-            public int x = 0;
-            public int y = 0;
-            public MapItem(int x, int y, long alt) { this.x = x; this.y = y; this.alt = alt; }
-
-        }
-
-
         private static long GetLowestRiskLevel(int[,] map)
         {
+            //  djikstra
+            long [,] risk = new long[map.GetLength(0), map.GetLength(1)];
+            for (int x = 0; x < risk.GetLength(0); x++) for (int y = 0; y < risk.GetLength(1); y++) risk[x,y] = long.MaxValue;
+            risk[0,0] = 0;
 
-            MapItem [,] imap = new MapItem[map.GetLength(0), map.GetLength(1)];
-            for (int x = 0; x < map.GetLength(0); x++) for (int y = 0; y < map.GetLength(1); y++) imap[x,y] = new MapItem(x, y, map[x,y]);
-            imap[0,0].risklevel = 0;
-
-            List<MapItem> itemstosearch = new List<MapItem>() { imap[0,0] };
-            MapItem lastitem = imap[imap.GetLength(0)-1, imap.GetLength(1)-1];
+            var itemstosearch = new List<(int, int)>() { (0,0) };
+            var lastitem = (map.GetLength(0)-1, map.GetLength(1)-1);
 
             while(true)
             {
-                MapItem lowest = itemstosearch[0];
-                
+                var lowest = itemstosearch[0];
+                foreach(var it in itemstosearch) if (risk[it.Item1, it.Item2] < risk[lowest.Item1, lowest.Item2]) lowest = it;
+                itemstosearch.Remove(lowest);
 
                 foreach(var srch in new List<(int, int)>() { (-1, 0), (0, -1), (+1, 0), (0, +1) })
                 {
-                    int x = lowest.x + srch.Item1;
-                    int y = lowest.y + srch.Item2; // vyradim mimo mapu a uz ohodnocene
-                    if (x < 0 || x >= imap.GetLength(0) || y < 0 || y >= imap.GetLength(1) || imap[x,y].risklevel != long.MaxValue) continue;
+                    int x = lowest.Item1 + srch.Item1;
+                    int y = lowest.Item2 + srch.Item2; // vyradim mimo mapu a uz ohodnocene
+                    if (x < 0 || x >= risk.GetLength(0) || y < 0 || y >= risk.GetLength(1) || risk[x,y] != long.MaxValue) continue;
 
-                    var it = imap[x,y];
-                    it.risklevel = lowest.risklevel + it.alt;
+                    risk[x,y] = risk[lowest.Item1, lowest.Item2] + map[x,y];
                     
-                    Console.WriteLine("x {0},  y{1}", x, y);
-                    for (int fy = 0; fy < map.GetLength(1); fy++)
+                    if ((x,y) == lastitem) 
                     {
-                        for (int fx = 0; fx < map.GetLength(0); fx++) 
-                        {
-                            if (imap[fx,fy].risklevel == long.MaxValue)
-                                Console.Write(" - ");
-                            else
-                                Console.Write("{0, 3}", imap[fx,fy].risklevel);
-                        }
-                        Console.WriteLine();
+                        return risk[x,y];
                     }
 
-                    if (it == lastitem) 
-                    {
-                        return it.risklevel;
-                    }
-
-                    itemstosearch.Add(it);
-                    
+                    itemstosearch.Add((x,y));
                 }
             }
-
         }
 
        public static long Task1()
        {
-           var map = aocIO.GetByteMap("tst.txt");
+           var map = aocIO.GetByteMap("day15.txt");
            return GetLowestRiskLevel(map);
        }
 
        public static long Task2()
-       {                
-            return 0;
+       {        
+           var map = aocIO.GetByteMap("day15.txt");        
+           return 0;
        }       
     }
 }
