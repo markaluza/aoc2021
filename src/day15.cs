@@ -48,8 +48,28 @@ namespace aoc2021
 
        public static long Task2()
        {        
-           var map = aocIO.GetByteMap("day15.txt");        
-           return 0;
+            var map = aocIO.GetByteMap("day15.txt"); 
+            var map2 = new int[map.GetLength(0)*5,map.GetLength(1)*5];
+
+            for (int row = 0; row < 5; row++)
+            {
+                for (int col = 0; col < 5; col++)
+                {
+                    int offset = row + col;
+                    int sx = map.GetLength(0) * col;
+                    int sy = map.GetLength(1) * row;
+                    for (int y = 0; y < map.GetLength(1); y++)
+                    {
+                        for (int x = 0; x < map.GetLength(0); x++)
+                        {
+                            map2[sx + x, sy +y] = map[x,y] + offset;
+                            if (map2[sx + x, sy +y] > 9) map2[sx + x, sy +y] -=9;
+                        }
+                    }
+                }
+            }
+
+           return GetLowestRiskLevel(map2);
        }       
     }
 }
