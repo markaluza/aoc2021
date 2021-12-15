@@ -18,7 +18,7 @@ namespace aoc2021
 
             while(true)
             {
-                var lowest = itemstosearch[0];
+                var lowest = itemstosearch[0]; // lepsi by asi bylo pouzit nejaky sorted set...
                 foreach(var it in itemstosearch) if (risk[it.Item1, it.Item2] < risk[lowest.Item1, lowest.Item2]) lowest = it;
                 itemstosearch.Remove(lowest);
 
