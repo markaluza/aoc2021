@@ -25,6 +25,19 @@ namespace aoc2021
         {
             Console.WriteLine(String.Join(", ", list));
         }
+
+        public static int [,] GetByteMap(string file)
+        {
+            var lines = aocIO.GetStringList(file);
+            var map = new int [lines[0].Length, lines.Count];
+
+            for (int y =0; y < lines.Count; y++)
+            {
+                for (int x= 0; x < lines[y].Length; x++)
+                    map[x,y] = lines[y][x] - '0';
+            }
+            return map;
+        }
         
 
     }

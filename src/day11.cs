@@ -6,19 +6,6 @@ namespace aoc2021
 {
     class Day11
     {
-        
-        private static int [,] GetInput()
-        {
-            var lines = aocIO.GetStringList("day11.txt");
-            var map = new int [lines[0].Length, lines.Count];
-
-            for (int y =0; y < lines.Count; y++)
-            {
-                for (int x= 0; x < lines[y].Length; x++)
-                    map[x,y] = lines[y][x] - '0';
-            }
-            return map;
-        }
 
         private static void Increase(ref int [,] map, int x, int y, ref HashSet<(int, int)> flashed)
         {
@@ -62,7 +49,7 @@ namespace aoc2021
 
        public static long Task1()
        {
-            var map = GetInput();
+            var map = aocIO.GetByteMap("day11.txt");
 
             long flashes = 0;
             for (int i =0; i < 100; i++)
@@ -75,7 +62,7 @@ namespace aoc2021
 
        public static long Task2()
        {                
-            var map = GetInput();
+            var map = aocIO.GetByteMap("day11.txt");
 
             for (long i =1; ; i++)
             {
