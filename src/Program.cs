@@ -6,7 +6,7 @@ namespace aoc2021
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("{0}", Day14.Task2());
+            Console.WriteLine("{0}", Day15.Task1());
             Console.ReadKey();
         }
     }
