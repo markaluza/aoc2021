@@ -22,8 +22,8 @@ namespace aoc2021
             {
                 while (BitBuffer.Length < cnt)
                 {
-                    var topchar =  InputLine.Dequeue(); string topstr = "0"; topstr += topchar;
-                    BitBuffer += string.Format("{0:0000}", Convert.ToString(Convert.ToInt32(topstr, 16), 2)).PadLeft(4, '0');
+                    var topchar =  InputLine.Dequeue(); string topstr = ""; topstr += topchar;
+                    BitBuffer += Convert.ToString(Convert.ToInt32(topstr, 16), 2).PadLeft(4, '0');
                 }
 
                 var ret = BitBuffer.Substring(0, cnt);
@@ -32,18 +32,14 @@ namespace aoc2021
                 //Console.Write(ret);
                 return ret;
             }
-
             public uint GetBitUint(int BitCount)
             {
                 return Convert.ToUInt32(GetBitsCnt(BitCount), 2);
             }
-
             public char GetBit()
             {
                 return GetBitsCnt(1)[0];
             }
-
-
         }
 
         abstract class Packet
