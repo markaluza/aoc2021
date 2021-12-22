@@ -17,7 +17,7 @@ namespace aoc2021
 
            // x=240..292, y=-90..-57
            // tak to byl zahul :)  
-           // rychlost od 0->-90 v jednom kroku znamena ze predchozi krok byl -90 + 1
+           // nejvyssi rychlosti dosahneme tak, ze od 0 -> -90(dolni hrana obdelniku) je v jednom kroku -> znamena ze predchozi krok byl -90 + 1
            // predchozi krok ma stejnou rychlost jako prvni jen s opacnym znamenkem a voilaaaa :)
            return integrate(-(-90+1));
 
